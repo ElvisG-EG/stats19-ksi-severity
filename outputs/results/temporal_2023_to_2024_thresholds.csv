@@ -1,0 +1,10 @@
+model,training,threshold_2023,oof_macro_f1_2023,frozen_threshold_2023_24
+lr,untreated,0.3,0.6419,0.31
+lr,weight,0.62,0.6411,0.62
+lr,oversample,0.63,0.6407,0.62
+rf,untreated,0.3,0.648,0.3
+rf,weight,0.53,0.6474,0.52
+rf,oversample,0.53,0.6473,0.51
+hgb,untreated,0.3,0.651,0.3
+hgb,weight,0.62,0.6506,0.62
+hgb,oversample,0.61,0.6496,0.62

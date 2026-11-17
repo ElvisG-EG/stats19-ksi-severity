@@ -1,0 +1,64 @@
+measure,rule,model,training,point_rank,mean_rank,rank_lo,rank_hi,share_ranked_first,share_in_top3
+ap,not threshold based,lr,untreated,7,7.0,7.0,7.0,0.0,0.0
+ap,not threshold based,lr,weight,8,8.299,8.0,9.0,0.0,0.0
+ap,not threshold based,lr,oversample,9,8.701,8.0,9.0,0.0,0.0
+ap,not threshold based,rf,untreated,5,4.834,4.0,6.0,0.0,0.0
+ap,not threshold based,rf,weight,4,4.2075,4.0,5.0,0.0,0.001
+ap,not threshold based,rf,oversample,6,5.957,5.0,6.0,0.0,0.0
+ap,not threshold based,hgb,untreated,1,1.001,1.0,1.0,0.999,1.0
+ap,not threshold based,hgb,weight,2,2.1275,2.0,3.0,0.001,1.0
+ap,not threshold based,hgb,oversample,3,2.873,2.0,3.0,0.0,0.999
+auc,not threshold based,lr,untreated,7,7.0025,7.0,7.0,0.0,0.0
+auc,not threshold based,lr,weight,8,8.405,8.0,9.0,0.0,0.0
+auc,not threshold based,lr,oversample,9,8.5925,8.0,9.0,0.0,0.0
+auc,not threshold based,rf,untreated,5,4.9285,4.0,5.0,0.0,0.0
+auc,not threshold based,rf,weight,4,4.09,4.0,5.0,0.0,0.0
+auc,not threshold based,rf,oversample,6,5.9815,6.0,6.0,0.0,0.0
+auc,not threshold based,hgb,untreated,1,1.161,1.0,2.0,0.8475,1.0
+auc,not threshold based,hgb,weight,2,1.9125,1.0,3.0,0.1505,1.0
+auc,not threshold based,hgb,oversample,3,2.9265,2.0,3.0,0.002,1.0
+brier,not threshold based,lr,untreated,3,3.0,3.0,3.0,0.0,1.0
+brier,not threshold based,lr,weight,8,8.0,8.0,8.0,0.0,0.0
+brier,not threshold based,lr,oversample,9,9.0,9.0,9.0,0.0,0.0
+brier,not threshold based,rf,untreated,2,2.0,2.0,2.0,0.0,1.0
+brier,not threshold based,rf,weight,5,5.0,5.0,5.0,0.0,0.0
+brier,not threshold based,rf,oversample,4,4.0,4.0,4.0,0.0,0.0
+brier,not threshold based,hgb,untreated,1,1.0,1.0,1.0,1.0,1.0
+brier,not threshold based,hgb,weight,7,6.9995,7.0,7.0,0.0,0.0
+brier,not threshold based,hgb,oversample,6,6.0005,6.0,6.0,0.0,0.0
+macro_f1,opt,lr,untreated,7,7.0025,7.0,7.0,0.0,0.0
+macro_f1,opt,lr,weight,9,8.573,8.0,9.0,0.0,0.0
+macro_f1,opt,lr,oversample,8,8.4245,8.0,9.0,0.0,0.0
+macro_f1,opt,rf,untreated,5,5.114,4.0,6.0,0.0,0.0045
+macro_f1,opt,rf,weight,4,4.0585,3.0,5.0,0.001,0.0725
+macro_f1,opt,rf,oversample,6,5.721,5.0,6.0,0.0,0.001
+macro_f1,opt,hgb,untreated,1,1.058,1.0,2.0,0.9475,1.0
+macro_f1,opt,hgb,weight,2,2.3075,1.0,3.0,0.0395,0.982
+macro_f1,opt,hgb,oversample,3,2.741,2.0,4.0,0.012,0.94
+macro_f1,ref,lr,untreated,8,8.3435,8.0,9.0,0.0,0.0
+macro_f1,ref,lr,weight,5,5.3405,5.0,6.0,0.0,0.0
+macro_f1,ref,lr,oversample,6,5.6595,5.0,6.0,0.0,0.0
+macro_f1,ref,rf,untreated,9,8.6565,8.0,9.0,0.0,0.0
+macro_f1,ref,rf,weight,1,1.1415,1.0,2.0,0.8585,1.0
+macro_f1,ref,rf,oversample,2,1.8585,1.0,2.0,0.1415,1.0
+macro_f1,ref,hgb,untreated,7,7.0,7.0,7.0,0.0,0.0
+macro_f1,ref,hgb,weight,4,3.5025,3.0,4.0,0.0,0.4975
+macro_f1,ref,hgb,oversample,3,3.4975,3.0,4.0,0.0,0.5025
+balanced_accuracy,opt,lr,untreated,9,8.954,8.0,9.0,0.0,0.0
+balanced_accuracy,opt,lr,weight,8,7.855,7.0,9.0,0.0,0.0
+balanced_accuracy,opt,lr,oversample,7,7.191,7.0,8.0,0.0,0.0
+balanced_accuracy,opt,rf,untreated,3,3.2915,2.0,6.0,0.0005,0.5845
+balanced_accuracy,opt,rf,weight,4,3.344,2.0,6.0,0.0,0.562
+balanced_accuracy,opt,rf,oversample,2,2.9275,2.0,5.0,0.0005,0.734
+balanced_accuracy,opt,hgb,untreated,1,1.0015,1.0,1.0,0.999,1.0
+balanced_accuracy,opt,hgb,weight,5,4.7315,2.0,6.0,0.0,0.106
+balanced_accuracy,opt,hgb,oversample,6,5.704,4.0,6.0,0.0,0.0135
+balanced_accuracy,ref,lr,untreated,9,8.5785,8.0,9.0,0.0,0.0
+balanced_accuracy,ref,lr,weight,4,3.942,3.0,5.0,0.0,0.1525
+balanced_accuracy,ref,lr,oversample,3,3.241,3.0,4.0,0.0,0.7765
+balanced_accuracy,ref,rf,untreated,8,8.4215,8.0,9.0,0.0,0.0
+balanced_accuracy,ref,rf,weight,5,4.8185,3.0,5.0,0.0,0.071
+balanced_accuracy,ref,rf,oversample,6,5.9985,6.0,6.0,0.0,0.0
+balanced_accuracy,ref,hgb,untreated,7,7.0,7.0,7.0,0.0,0.0
+balanced_accuracy,ref,hgb,weight,1,1.44,1.0,2.0,0.56,1.0
+balanced_accuracy,ref,hgb,oversample,2,1.56,1.0,2.0,0.44,1.0

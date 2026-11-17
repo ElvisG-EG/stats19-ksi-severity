@@ -1,0 +1,11 @@
+group,casualties,collisions,ksi_cases,prevalence,prev_lo,prev_hi,fewer_than_30_ksi
+All casualties,127883,101525,29296,0.22908,0.22652,0.23151,False
+Road user: pedestrian,19978,19115,6195,0.31009,0.30322,0.3169,False
+Road user: cyclist,16042,15836,4303,0.26823,0.2613,0.27546,False
+Road user: motorcyclist,15447,14959,6002,0.38855,0.38069,0.39657,False
+Road user: e-scooter rider,1227,1168,442,0.36023,0.33229,0.38721,False
+Road user: other,75189,51609,12354,0.16431,0.16109,0.16727,False
+Recording system: stable injury-based,70735,54547,17440,0.24655,0.24307,0.25014,False
+Recording system: stable non-injury-based,8082,6229,1807,0.22358,0.21405,0.23331,False
+Recording system: changed or mixed,49066,40749,10049,0.20481,0.20094,0.20851,False
+Unchanged forces (both stable groups),78817,60776,19247,0.2442,0.24096,0.24757,False

@@ -1,0 +1,7 @@
+variant,measure,point_order,share_of_draws_hgb_first
+base,ap,hgb > rf > lr,1.0
+base,auc,hgb > rf > lr,1.0
+force_included,ap,hgb > rf > lr,1.0
+force_included,auc,hgb > rf > lr,1.0
+casualty_count_removed,ap,hgb > rf > lr,1.0
+casualty_count_removed,auc,hgb > rf > lr,1.0
