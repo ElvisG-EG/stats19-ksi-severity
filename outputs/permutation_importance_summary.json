@@ -1,0 +1,75 @@
+{
+ "finished": "2026-11-08T02:07:53",
+ "notebook": "09",
+ "quick_test": false,
+ "model": "hgb/untreated",
+ "repeats_per_field": 3,
+ "planned_repeats": 10,
+ "fields": 47,
+ "settings": {
+  "learning_rate": 0.05,
+  "max_iter": 200,
+  "max_leaf_nodes": 63,
+  "min_samples_leaf": 50,
+  "l2_regularization": 0.0
+ },
+ "shuffle_seed_base": "SEED + 100 + 1000 * fold + field index",
+ "checks": [
+  {
+   "check": "fold 0 refit vs notebook 04 scores",
+   "max_abs_difference": 2.9800951040215296e-08
+  },
+  {
+   "check": "shuffle equivalence, field age_of_casualty",
+   "max_abs_difference": 0.0
+  },
+  {
+   "check": "shuffle equivalence, field casualty_class",
+   "max_abs_difference": 0.0
+  },
+  {
+   "check": "fold 1 refit vs notebook 04 scores",
+   "max_abs_difference": 2.978709168210969e-08
+  },
+  {
+   "check": "fold 2 refit vs notebook 04 scores",
+   "max_abs_difference": 2.9801759837688735e-08
+  },
+  {
+   "check": "fold 3 refit vs notebook 04 scores",
+   "max_abs_difference": 2.9794828826368303e-08
+  },
+  {
+   "check": "fold 4 refit vs notebook 04 scores",
+   "max_abs_difference": 2.9762141418032684e-08
+  }
+ ],
+ "mean_fold_spearman": 0.9386679000925069,
+ "min_fold_spearman": 0.9128122109158187,
+ "mean_top10_overlap": 9.2,
+ "top10_in_all_folds": [
+  "age_of_casualty",
+  "casualty_class",
+  "casualty_type",
+  "first_point_of_impact",
+  "number_of_vehicles",
+  "speed_limit",
+  "vehicle_leaving_carriageway",
+  "vehicle_manoeuvre",
+  "vehicle_type"
+ ],
+ "top10_in_at_least_four_folds": [
+  "age_of_casualty",
+  "casualty_class",
+  "casualty_type",
+  "first_point_of_impact",
+  "number_of_vehicles",
+  "speed_limit",
+  "vehicle_leaving_carriageway",
+  "vehicle_manoeuvre",
+  "vehicle_type"
+ ],
+ "spearman_dev_vs_2025": 0.9592969472710455,
+ "top10_overlap_dev_vs_2025": 10,
+ "refit_vs_frozen_2025_max_diff": 2.979755364673764e-08
+}

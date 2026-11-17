@@ -1,0 +1,86 @@
+{
+  "created": "2026-11-07T12:04:29",
+  "seed": 20261107,
+  "folds": 5,
+  "pilot_fraction": 0.2,
+  "sklearn": "1.6.1",
+  "pandas": "2.2.3",
+  "dev_casualties": 261249,
+  "dev_collisions": 205185,
+  "dev_ksi_rate": 0.2117,
+  "test_casualties_2025": 127883,
+  "pilot_casualties": 52254,
+  "pilot_collisions": 41037,
+  "predictors": 47,
+  "numeric": [
+    "age_of_casualty",
+    "casualty_imd_decile",
+    "age_of_driver",
+    "engine_capacity_cc",
+    "driver_imd_decile",
+    "speed_limit",
+    "number_of_vehicles",
+    "number_of_casualties"
+  ],
+  "categorical": [
+    "casualty_class",
+    "sex_of_casualty",
+    "casualty_type",
+    "pedestrian_location",
+    "pedestrian_movement",
+    "car_passenger",
+    "bus_or_coach_passenger",
+    "pedestrian_road_maintenance_worker",
+    "vehicle_type",
+    "towing_and_articulation",
+    "vehicle_manoeuvre",
+    "vehicle_direction_from",
+    "vehicle_direction_to",
+    "vehicle_location_restricted_lane",
+    "junction_location",
+    "skidding_and_overturning",
+    "hit_object_in_carriageway",
+    "vehicle_leaving_carriageway",
+    "hit_object_off_carriageway",
+    "first_point_of_impact",
+    "vehicle_left_hand_drive",
+    "journey_purpose_of_driver",
+    "sex_of_driver",
+    "propulsion_code",
+    "first_road_class",
+    "road_type",
+    "junction_detail",
+    "junction_control",
+    "second_road_class",
+    "pedestrian_crossing",
+    "light_conditions",
+    "weather_conditions",
+    "road_surface_conditions",
+    "carriageway_hazards",
+    "urban_or_rural_area",
+    "trunk_road_flag",
+    "hour",
+    "day_of_week",
+    "month"
+  ],
+  "dropped_by_rule": [
+    "age_of_vehicle"
+  ],
+  "sensitivity_field": [
+    "number_of_casualties"
+  ],
+  "reserved_fields": [
+    "police_force",
+    "casualty_injury_based",
+    "escooter_flag"
+  ],
+  "new_levels_in_2025": {
+    "first_road_class": {
+      "-1": 8
+    },
+    "second_road_class": {
+      "9": 54
+    }
+  },
+  "sealed_labels_sha256": "22ddae8fde110307daf9bd711a84f0b9cd18166d24e52194082b60e53cc3d4e3"
+}

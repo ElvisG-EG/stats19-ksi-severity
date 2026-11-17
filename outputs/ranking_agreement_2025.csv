@@ -1,0 +1,6 @@
+comparison,spearman,kendall_tau
+macro-F1 at the macro-F1 threshold vs at 0.5 (2025),0.15,0.0
+average precision vs ROC-AUC (2025),1.0,1.0
+macro-F1 at the macro-F1 threshold: development vs 2025,0.967,0.889
+average precision: development vs 2025,0.983,0.944
+ROC-AUC: development vs 2025,0.996,0.986

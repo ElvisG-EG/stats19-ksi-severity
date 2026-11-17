@@ -1,0 +1,20 @@
+[
+ {
+  "id": "sensitivity_untreated_only",
+  "logged": "2026-11-07T21:55:02",
+  "notebook": "08",
+  "plan": "Chapter 3: sensitivity analyses for all nine model and training combinations.",
+  "done": "Sensitivity refits (police force added; number of casualties removed) run for the three untreated models only.",
+  "reason": "Compute. Training treatments did not improve ranking in notebooks 06 and 07, and the selected model is untreated.",
+  "approved_by": "Kojo (user), 2026-11-07"
+ },
+ {
+  "id": "importance_repeats",
+  "logged": "2026-11-08T02:07:53",
+  "notebook": "09",
+  "plan": "Chapter 3: ten shuffles per field.",
+  "done": "3 shuffles per field in each fold and on 2025.",
+  "reason": "Compute: one full prediction per shuffle made ten repeats take several hours on free Colab. Measured on real development data, the SD across ten shuffles for the four leading fields was 0.0009 to 0.0019 in average precision against drops of 0.020 to 0.102, and the mean of the first five shuffles differed from the mean of ten by less than 0.0007.",
+  "approved_by": "Recorded on 2026-11-07 after the ten-repeat run proved too slow; confirmed by running this notebook as delivered"
+ }
+]

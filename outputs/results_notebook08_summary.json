@@ -1,0 +1,76 @@
+{
+ "finished": "2026-11-07T21:55:02",
+ "notebook": "08",
+ "quick_test": false,
+ "bootstrap_replicates": 2000,
+ "seeds": {
+  "folds_2023": 20261112,
+  "bootstrap_2024": 20261113,
+  "bootstrap_sensitivity": 20261114
+ },
+ "parts_run": {
+  "A": true,
+  "B": true
+ },
+ "folds_2023_sha256": "f895e27cdf64a5eb20d8b96023674f7c996639f4db04fe58a0aef0d1c5c37507",
+ "frozen_settings": {
+  "lr": {
+   "C": 0.1
+  },
+  "rf": {
+   "max_features": 0.2,
+   "min_samples_leaf": 10,
+   "min_samples_split": 10
+  },
+  "hgb": {
+   "learning_rate": 0.05,
+   "max_iter": 200,
+   "max_leaf_nodes": 63,
+   "min_samples_leaf": 50,
+   "l2_regularization": 0.0
+  }
+ },
+ "variants": {
+  "force_included": {
+   "numeric": 8,
+   "categorical": 40
+  },
+  "casualty_count_removed": {
+   "numeric": 7,
+   "categorical": 39
+  }
+ },
+ "departures": [
+  "sensitivity_untreated_only"
+ ],
+ "outputs": [
+  "bootstrap_draws_sensitivity_2025.parquet",
+  "bootstrap_draws_temporal_2024.parquet",
+  "sensitivity_2025_by_recording_system.csv",
+  "sensitivity_2025_measures.csv",
+  "sensitivity_2025_model_order.csv",
+  "sensitivity_2025_paired_contrasts.csv",
+  "sensitivity_2025_system_calibration_gap.csv",
+  "sensitivity_thresholds_and_dev_oof.csv",
+  "temporal_2023_to_2024_decision_measures.csv",
+  "temporal_2023_to_2024_paired_contrasts.csv",
+  "temporal_2023_to_2024_ranking_agreement.csv",
+  "temporal_2023_to_2024_score_measures.csv",
+  "temporal_2023_to_2024_thresholds.csv",
+  "temporal_2023_to_2024_vs_2025_test.csv"
+ ],
+ "output_sha256": {
+  "sensitivity_2025_by_recording_system.csv": "1784cb60f8c465dbd154fafb0ca4efa937061f362cdc1979b81c987d2b516190",
+  "sensitivity_2025_measures.csv": "117ba08d39ebb2a9daeae39d7819f825e7d7b9f15a0719fdccd5f7b0a21f2a55",
+  "sensitivity_2025_model_order.csv": "3c75cffec9d5d5553588b0e639d7bb01d967ad6310e44acb2f36e23ddf0e9818",
+  "sensitivity_2025_paired_contrasts.csv": "c965313959d6f524bc3d524182dccd4eb72f121b922f7eae0d831325164ea665",
+  "sensitivity_2025_system_calibration_gap.csv": "d63d075e6686643112716c21b67443e92a427839cc77a97a5f6f3113253aa907",
+  "sensitivity_thresholds_and_dev_oof.csv": "638ed64595bf6e173f4570b2b1b8373258cc6409a21709286d32dd8f80c2b198",
+  "temporal_2023_to_2024_decision_measures.csv": "d18a0eae80f7216713f71ee1df71cf9a8c50299026da4e699e42af0f82cc6fe6",
+  "temporal_2023_to_2024_paired_contrasts.csv": "2225ff34356b7ed72c16d0cf126cf67c9db4918c0a729be5ea0fa07115b618fb",
+  "temporal_2023_to_2024_ranking_agreement.csv": "590b9c122e76d7dd6688b7ac6b20ffbdf51764b00b0fddcb554dde0fff150f63",
+  "temporal_2023_to_2024_score_measures.csv": "66b0f67da790da8414059bc26a951b5d897cc89684df6aa3e7728f4240671b5e",
+  "temporal_2023_to_2024_thresholds.csv": "f5db3fc1829b8d36716ec278923befcf922cf00414ee24723b99ec7432b13d15",
+  "temporal_2023_to_2024_vs_2025_test.csv": "c98a2cc25d5174d4a61148ca8b3792581305b8b788ac769ef9f7827c8f1f18b5"
+ }
+}

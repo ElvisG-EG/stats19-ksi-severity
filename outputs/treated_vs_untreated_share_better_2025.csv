@@ -1,0 +1,43 @@
+model,training,measure,rule,share_of_draws_treated_better
+lr,weight,ap,not threshold based,0.0
+lr,weight,auc,not threshold based,0.0005
+lr,weight,brier,not threshold based,0.0
+lr,weight,macro_f1,opt,0.0
+lr,weight,macro_f1,ref,1.0
+lr,weight,balanced_accuracy,opt,0.966
+lr,weight,balanced_accuracy,ref,1.0
+lr,oversample,ap,not threshold based,0.0
+lr,oversample,auc,not threshold based,0.002
+lr,oversample,brier,not threshold based,0.0
+lr,oversample,macro_f1,opt,0.0025
+lr,oversample,macro_f1,ref,1.0
+lr,oversample,balanced_accuracy,opt,0.988
+lr,oversample,balanced_accuracy,ref,1.0
+rf,weight,ap,not threshold based,0.7985
+rf,weight,auc,not threshold based,0.911
+rf,weight,brier,not threshold based,0.0
+rf,weight,macro_f1,opt,0.88
+rf,weight,macro_f1,ref,1.0
+rf,weight,balanced_accuracy,opt,0.482
+rf,weight,balanced_accuracy,ref,1.0
+rf,oversample,ap,not threshold based,0.0355
+rf,oversample,auc,not threshold based,0.0175
+rf,oversample,brier,not threshold based,0.0
+rf,oversample,macro_f1,opt,0.2455
+rf,oversample,macro_f1,ref,1.0
+rf,oversample,balanced_accuracy,opt,0.6125
+rf,oversample,balanced_accuracy,ref,1.0
+hgb,weight,ap,not threshold based,0.001
+hgb,weight,auc,not threshold based,0.152
+hgb,weight,brier,not threshold based,0.0
+hgb,weight,macro_f1,opt,0.041
+hgb,weight,macro_f1,ref,1.0
+hgb,weight,balanced_accuracy,opt,0.0
+hgb,weight,balanced_accuracy,ref,1.0
+hgb,oversample,ap,not threshold based,0.0
+hgb,oversample,auc,not threshold based,0.009
+hgb,oversample,brier,not threshold based,0.0
+hgb,oversample,macro_f1,opt,0.016
+hgb,oversample,macro_f1,ref,1.0
+hgb,oversample,balanced_accuracy,opt,0.0
+hgb,oversample,balanced_accuracy,ref,1.0
