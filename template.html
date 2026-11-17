@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STATS19 Severity Models Appendix</title>
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--panel:#fff;--ink:#0b0b0b;--ink2:#52514e;--mute:#8a8984;--line:#e4e3de;--grid:#ecebe7;
+--lr:#2a78d6;--rf:#eb6834;--hgb:#1baf7a;--c4:#eda100;--c5:#e87ba4;--c7:#6250d6;--warn:#fff6e0;--warnb:#eda100}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a19;--panel:#222221;--ink:#f0efec;--ink2:#c3c2b7;--mute:#8d8c85;--line:#383836;--grid:#2e2e2c;
+--lr:#3987e5;--rf:#d95926;--hgb:#199e70;--c4:#c98500;--c5:#d55181;--c7:#9085e9;--warn:#2b2616;--warnb:#c98500}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a19;--panel:#222221;--ink:#f0efec;--ink2:#c3c2b7;--mute:#8d8c85;--line:#383836;--grid:#2e2e2c;
+--lr:#3987e5;--rf:#d95926;--hgb:#199e70;--c4:#c98500;--c5:#d55181;--c7:#9085e9;--warn:#2b2616;--warnb:#c98500}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px 48px}
+header{padding:24px 0 8px}h1{font-size:22px;margin:0 0 4px}h2{font-size:18px;margin:28px 0 4px}h3{font-size:14px;margin:20px 0 2px}
+.sub{color:var(--ink2);margin:0}
+nav{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:12px 0 0;position:sticky;top:0;background:var(--bg);z-index:5;padding-top:6px}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink2);font:inherit;padding:8px 12px;cursor:pointer}
+nav button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+nav .sp{flex:1}nav .th{font-size:12px}
+section.page{display:none}section.page.on,body.printall section.page{display:block}
+.fig{margin:12px 0 4px}.src{color:var(--mute);font-size:12px;margin:2px 0 14px}
+.note{background:var(--warn);border-left:3px solid var(--warnb);padding:8px 12px;margin:12px 0;font-size:13px}
+.chart{width:100%}
+table{border-collapse:collapse;width:100%;font-size:11.5px;margin:6px 0}
+th,td{padding:3px 6px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+th:first-child,td:first-child{text-align:left}th{color:var(--ink2);font-weight:600;border-bottom:1px solid var(--ink2)}
+.tw{overflow-x:auto}
+.cap{font-weight:600;margin:16px 0 0;font-size:13px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+.pb{page-break-before:always}
+@media print{.cap{break-after:avoid}nav,.th{display:none}.note{break-inside:avoid}.fig,table{break-inside:avoid}}
+</style></head><body>
+<div class="wrap">
+<header><h1>Predicting recorded road casualty severity: results appendix</h1>
+<p class="sub">STATS19, Great Britain. Development 2023–2024, temporal test 2025. KSI = killed or seriously injured, as recorded. Logistic regression (LR), random forest (RF), histogram gradient boosting (HGB). Every estimate is shown with its 95% percentile interval from the paired collision bootstrap (2,000 replicates) unless stated.</p></header>
+<nav id="nav" role="tablist"></nav>
+
+<section class="page" id="p1"></section>
+<section class="page" id="p2"></section>
+<section class="page" id="p3"></section>
+<section class="page" id="p4"></section>
+<section class="page" id="p5"></section>
+</div>
+<script>/*PLOTLY*/</script>
+<script>/*DATA*/</script>
+<script>
+const PAGES=[['p1','1  Data'],['p2','2  Model comparison (development)'],['p3','3  2025 test'],['p4','4  Subgroups and recording systems'],['p5','5  Predictor importance']];
+const M=['lr','rf','hgb'], MN={lr:'Logistic regression',rf:'Random forest',hgb:'Gradient boosting'}, T=['untreated','weight','oversample'];
+const TN={untreated:'untreated',weight:'class weights',oversample:'oversampled'};
+const SYM={untreated:'circle',weight:'square',oversample:'diamond'};
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const mc=m=>css('--'+m);
+const f=(x,d=3)=>x==null||isNaN(x)?'':Number(x).toFixed(d);
+const ci=(e,l,h,d=3)=>`${f(e,d)} [${f(l,d)}, ${f(h,d)}]`;
+const pct=(x,d=1)=>f(100*x,d)+'%';
+const n0=x=>Number(x).toLocaleString('en-GB');
+const key=(m,t)=>m+'/'+t;
+const lab=(m,t)=>m.toUpperCase()+' '+TN[t];
+const sel=(arr,o)=>arr.filter(r=>Object.keys(o).every(k=>r[k]===o[k]));
+const one=(arr,o)=>sel(arr,o)[0];
+const cols5={get 0(){return css('--lr')},get 1(){return css('--rf')},get 2(){return css('--hgb')},get 3(){return css('--c4')},get 4(){return css('--c5')}};
+let tableNo=0,figNo=0,CH=[];
+function html(id,s){document.getElementById(id).insertAdjacentHTML('beforeend',s)}
+function chart(pid,id,h,src,title){figNo++;html(pid,`<div class="cap">Figure ${figNo}. ${title}</div><div class="fig"><div id="${id}" class="chart" style="height:${h}px"></div></div><div class="src">${src}</div>`)}
+function table(pid,title,cols,rows,src){tableNo++;
+ html(pid,`<div class="cap">Table ${tableNo}. ${title}</div><div class="tw"><table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div><div class="src">${src}</div>`)}
+function note(pid,s){html(pid,`<div class="note">${s}</div>`)}
+function base(extra){return Object.assign({paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:css('--ink2'),size:12,family:'system-ui,sans-serif'},margin:{l:60,r:20,t:30,b:48},
+ legend:{orientation:'h',y:-0.18,font:{color:css('--ink2')}},hoverlabel:{font:{size:12}}},extra||{})}
+function ax(extra){return Object.assign({gridcolor:css('--grid'),zerolinecolor:css('--line'),linecolor:css('--line'),tickfont:{color:css('--ink2')},automargin:true},extra||{})}
+const CFG={displaylogo:false,responsive:true,modeBarButtonsToRemove:['lasso2d','select2d']};
+function draw(){CH.forEach(fn=>fn())}
+function reg(id,fn){CH.push(()=>Plotly.react(id,...fn(),CFG))}
+
+/* ============ PAGE 1 ============ */
+(function(){const p='p1';
+html(p,`<h2>1  Data and outcome definition</h2><p class="sub">Casualty-level records with a recorded severity, 2023–2025. Development years 2023–2024 (${n0(261249)} casualties); 2025 held out as the temporal test (${n0(127883)} casualties, ${n0(101525)} collisions).</p>`);
+const all=D.prev.filter(r=>r.group==='All casualties');
+chart(p,'c1a',300,'Source: ksi_prevalence_by_year_and_group.csv. Prevalence is a descriptive proportion of the full year, so no sampling interval is shown.','Recorded KSI share of casualties by year');
+reg('c1a',()=>[[{x:all.map(r=>String(r.year)),y:all.map(r=>100*r.prevalence),type:'bar',marker:{color:css('--mute')},width:0.5,
+ text:all.map(r=>pct(r.prevalence,2)),textposition:'outside',textfont:{color:css('--ink')},customdata:all.map(r=>[n0(r.casualties),n0(r.ksi_cases)]),
+ hovertemplate:'%{x}: %{y:.2f}%<br>%{customdata[1]} KSI of %{customdata[0]} casualties<extra></extra>'}],
+ base({yaxis:ax({title:'KSI share (%)',range:[0,27]}),xaxis:ax({type:'category'}),showlegend:false})]);
+table(p,'Casualties and KSI by year',['Year','Casualties','KSI','KSI share','Share of total casualties'],all.map(r=>[r.year,n0(r.casualties),n0(r.ksi_cases),pct(r.prevalence,2),'100%']),'Source: ksi_prevalence_by_year_and_group.csv');
+const rusers=['pedestrian','cyclist','motorcyclist','e-scooter rider','other'];
+chart(p,'c1b',340,'Source: ksi_prevalence_by_year_and_group.csv. Descriptive proportions by year. The 2025 rise is concentrated in motorcyclists and cyclists, and in forces whose recording system changed (Figure 13).','Recorded KSI share by road-user group and year');
+reg('c1b',()=>[rusers.map((u,i)=>{const d=D.prev.filter(r=>r.group==='Road user: '+u);
+ return {x:d.map(r=>String(r.year)),y:d.map(r=>100*r.prevalence),mode:'lines+markers',name:u,line:{color:cols5[i],width:2},marker:{size:8,symbol:['circle','square','diamond','triangle-up','cross'][i],line:{color:css('--bg'),width:2}},hovertemplate:u+' %{x}: %{y:.1f}%<extra></extra>'}}),
+ base({yaxis:ax({title:'KSI share (%)'}),xaxis:ax({type:'category'}),margin:{l:60,r:110,t:20,b:60}})]);
+const rs=['stable injury-based','stable non-injury-based','changed or mixed'];
+chart(p,'c1c',320,'Source: ksi_prevalence_by_year_and_group.csv. Recording-system groups are defined from the DfT adjustment flag (Chapter 3); “changed or mixed” forces switched or mixed recording systems across 2023–2025.','Recorded KSI share by police-force recording system and year');
+reg('c1c',()=>[rs.map((u,i)=>{const d=D.prev.filter(r=>r.group==='Recording system: '+u);
+ return {x:d.map(r=>String(r.year)),y:d.map(r=>100*r.prevalence),mode:'lines+markers',name:u,line:{color:cols5[i],width:2},marker:{size:8,symbol:['circle','square','diamond'][i],line:{color:css('--bg'),width:2}},hovertemplate:u+' %{x}: %{y:.1f}%<extra></extra>'}}),
+ base({yaxis:ax({title:'KSI share (%)'}),xaxis:ax({type:'category'})})]);
+table(p,'Development folds (collision-grouped, outcome-stratified)',['Fold','Casualties','Collisions','KSI','KSI share','Share from 2024'],D.fold.map(r=>[r.fold,n0(r.casualties),n0(r.collisions),n0(r.ksi),pct(r.ksi_rate,2),pct(r.share_2024,1)]),'Source: fold_summary.csv. Folds keep every casualty from a collision together.');
+chart(p,'c1d',380,'Source: predictor_availability_by_year.csv, restricted to predictors used in the models. Age of vehicle is unknown for all 2025 records and is dropped by the availability rule.','Share of unknown values by predictor and year (12 highest)');
+const av=D.avail.slice().reverse();
+reg('c1d',()=>[['2023','2024','2025'].map((y,i)=>({y:av.map(r=>r.field),x:av.map(r=>100*r['unknown_'+y]),type:'bar',orientation:'h',name:y,marker:{color:[css('--c7'),css('--c4'),css('--rf')][i]},hovertemplate:'%{y} '+y+': %{x:.1f}%<extra></extra>'})),
+ base({barmode:'group',xaxis:ax({title:'Unknown or missing (%)'}),yaxis:ax({}),margin:{l:190,r:20,t:20,b:60}})]);
+const sc=D.status_counts;
+note(p,`Field inventory: ${sc.primary} primary predictors, plus one flagged for removal in a sensitivity analysis; ${sc.excluded} excluded fields; ${sc['reserved (not a primary predictor)']} reserved; ${sc['dropped by availability rule']} dropped by the availability rule. Full dictionary in field_dictionary.csv.`);
+})();
+
+/* ============ PAGE 2 ============ */
+(function(){const p='p2';
+html(p,`<h2 class="pb">2  Model comparison on the development years</h2><p class="sub">Five-fold collision-grouped cross-validation on 2023–2024. Settings were frozen before 2025 was opened. Thresholds were chosen by maximising the pooled out-of-fold macro-F1 (all five folds’ held-out scores combined). Models were then ranked by the mean of the five fold-level macro-F1 values at each model’s own frozen threshold.</p>`);
+const R=D.rank.slice().reverse();
+chart(p,'c2a',360,'Source: model_ranking_dev.csv. Points are fold means; bars are ±1 SD across the five folds (a spread across folds, not a confidence interval). All nine configurations lie within about 0.010 of one another.','Mean macro-F1 at the tuned threshold, by model and treatment');
+reg('c2a',()=>[[{y:R.map(r=>lab(r.model,r.training)),x:R.map(r=>r.mean),mode:'markers',type:'scatter',marker:{size:10,color:R.map(r=>mc(r.model)),symbol:R.map(r=>SYM[r.training]),line:{color:css('--bg'),width:2}},
+ error_x:{type:'data',array:R.map(r=>r.sd),visible:true,color:css('--mute'),thickness:1.5,width:4},hovertemplate:'%{y}<br>macro-F1 %{x:.4f}<extra></extra>',showlegend:false}],
+ base({xaxis:ax({title:'Macro-F1 (mean ± SD over 5 folds)',range:[0.636,0.656]}),yaxis:ax({}),margin:{l:170,r:20,t:20,b:50}})]);
+table(p,'Development ranking and selected thresholds',['Model','Training','Macro-F1 at tuned threshold (mean ± SD)','Macro-F1 at 0.5','Tuned threshold','Within one SD of best'],D.rank.map(r=>[r.model.toUpperCase(),TN[r.training],`${f(r.mean,4)} ± ${f(r.sd,4)}`,f(r.mean_at_ref,4),f(r.threshold,2),r.within_margin?'yes':'no']),'Source: model_ranking_dev.csv. Selected: HGB untreated, because it ranked first and the treatments did not improve the comparison.');
+chart(p,'c2b',340,'Source: fold_macro_f1_dev.csv. Each point is one fold; fold-to-fold spread is larger than gaps between most configurations.','Fold-level macro-F1 at the tuned threshold');
+reg('c2b',()=>[T.flatMap((t,ti)=>M.map(m=>{const d=sel(D.foldf1,{model:m,training:t});return {x:d.map(r=>lab(r.model,r.training)),y:d.map(r=>r.macro_f1_opt),mode:'markers',type:'scatter',name:lab(m,t),showlegend:false,marker:{size:8,color:mc(m),symbol:SYM[t],line:{color:css('--bg'),width:1.5}},hovertemplate:'%{x}, fold %{text}: %{y:.4f}<extra></extra>',text:d.map(r=>r.fold)}})),
+ base({yaxis:ax({title:'Macro-F1',range:[0.628,0.660]}),xaxis:ax({tickangle:-35}),margin:{l:60,r:20,t:20,b:110}})]);
+table(p,'Frozen decision thresholds (development out-of-fold scores)',['Model','Training','Rule','Threshold','Macro-F1','Recall','Precision','Specificity','Flagged share'],D.thr.map(r=>[r.model.toUpperCase(),TN[r.training],r.rule,f(r.threshold,2),f(r.macro_f1,4),f(r.recall,3),f(r.precision,3),f(r.specificity,3),pct(r.flagged_share,1)]),'Source: thresholds_dev.csv. Pooled over the five folds. The reference rule is 0.5; the tuned rule maximises pooled macro-F1 on a 0.05–0.95 grid. No bootstrap interval: thresholds are fixed design choices.');
+chart(p,'c2c',360,'Source: development_vs_2025.csv. Development values are out-of-fold means; 2025 values are point estimates (intervals in Figure 8). Differences mix model behaviour with a population change (higher KSI share in 2025), so AP rising is not evidence of better ranking.','Development versus 2025: average precision and ROC-AUC');
+reg('c2c',()=>{const d=D.dev25.filter(r=>r.training==='untreated');
+ return [[{x:d.map(r=>r.model.toUpperCase()),y:d.map(r=>r.ap_dev_oof),type:'bar',name:'AP development',marker:{color:css('--mute')}},{x:d.map(r=>r.model.toUpperCase()),y:d.map(r=>r.ap_2025),type:'bar',name:'AP 2025',marker:{color:css('--c7')}},
+  {x:d.map(r=>r.model.toUpperCase()),y:d.map(r=>r.auc_dev_oof),type:'bar',name:'AUC development',marker:{color:css('--mute'),opacity:0.5}},{x:d.map(r=>r.model.toUpperCase()),y:d.map(r=>r.auc_2025),type:'bar',name:'AUC 2025',marker:{color:css('--c7'),opacity:0.5}}],
+  base({barmode:'group',yaxis:ax({title:'Score',range:[0.3,0.8]}),xaxis:ax({}),legend:{orientation:'h',y:-0.15}})]});
+table(p,'Development (out-of-fold) versus 2025, all configurations',['Model','Training','AP dev','AP 2025','AUC dev','AUC 2025','Brier dev','Brier 2025'],D.dev25.map(r=>[r.model.toUpperCase(),TN[r.training],f(r.ap_dev_oof,4),f(r.ap_2025,4),f(r.auc_dev_oof,4),f(r.auc_2025,4),f(r.brier_dev_oof,4),f(r.brier_2025,4)]),'Source: development_vs_2025.csv. Brier scores differ by training treatment because weighted and oversampled scores are not calibrated probabilities (Figure 9).');
+note(p,'Logged departures from the plan: '+D.departures.map(d=>`<b>${d.id}</b> (notebook ${d.notebook}): ${d.done}`).join(' · ')+' The importance-repeats departure is recorded as proposed, pending confirmation.');
+})();
+
+/* ============ PAGE 3 ============ */
+(function(){const p='p3';
+html(p,`<h2 class="pb">3  Temporal test on 2025</h2><p class="sub">Models fitted on 2023–2024 with frozen settings and thresholds, scored once on the sealed 2025 casualties. Intervals resample 2025 collisions and are the same draws for every model, so they reflect 2025 sampling variation only, not variation from the choice of training years.</p>`);
+const meas=[['ap','Average precision'],['auc','ROC-AUC'],['brier','Brier (lower better)'],['cal_intercept','Cal. intercept (0 ideal)'],['cal_slope','Cal. slope (1 ideal)']];
+chart(p,'c3a',620,'Source: results_2025_score_measures.csv. Points are estimates; bars are 95% intervals. Calibration intercepts and Brier scores for weighted and oversampled fits reflect shifted base rates by construction, not poorer discrimination.','Score measures, all nine configurations');
+reg('c3a',()=>{const tr=[];const dom=[[0.0,0.19],[0.2,0.39],[0.4,0.59],[0.6,0.79],[0.8,1]];
+ meas.forEach(([k,t],i)=>{const d=D.score.filter(r=>r.measure===k);
+  tr.push({x:d.map(r=>r.estimate),y:d.map(r=>lab(r.model,r.training)),mode:'markers',type:'scatter',xaxis:'x'+(i+1),yaxis:'y'+(i+1),showlegend:false,
+   marker:{size:9,color:d.map(r=>mc(r.model)),symbol:d.map(r=>SYM[r.training]),line:{color:css('--bg'),width:1.5}},
+   error_x:{type:'data',symmetric:false,array:d.map(r=>r.hi-r.estimate),arrayminus:d.map(r=>r.estimate-r.lo),color:css('--mute'),thickness:1.5,width:3},
+   customdata:d.map(r=>[r.lo,r.hi]),hovertemplate:'%{y}<br>'+k+' %{x:.4f} [%{customdata[0]:.4f}, %{customdata[1]:.4f}]<extra></extra>'})});
+ const lay=base({margin:{l:150,r:10,t:30,b:30},grid:{rows:1,columns:5,pattern:'independent'},annotations:[]});
+ meas.forEach(([k,t],i)=>{lay['xaxis'+(i+1)]=ax({title:{text:t,font:{size:11}},nticks:4,tickfont:{size:10,color:css('--ink2')}});
+  lay['yaxis'+(i+1)]=ax({autorange:'reversed',showticklabels:i===0,tickfont:{size:10,color:css('--ink2')}})});
+ lay.xaxis1.domain=[0.19,0.30];lay.xaxis2.domain=[0.35,0.46];lay.xaxis3.domain=[0.51,0.62];lay.xaxis4.domain=[0.67,0.78];lay.xaxis5.domain=[0.83,0.99];
+ for(let i=1;i<=5;i++)lay['yaxis'+i].anchor='x'+i;
+ return [tr,lay]});
+table(p,'2025 score measures, untreated models (estimate [95% interval])',['Model','AP','ROC-AUC','Brier','Calibration intercept','Calibration slope'],
+ M.map(m=>{const g=k=>one(D.score,{model:m,training:'untreated',measure:k});return [m.toUpperCase()].concat(['ap','auc','brier','cal_intercept','cal_slope'].map(k=>ci(g(k).estimate,g(k).lo,g(k).hi,3)))}),'Source: results_2025_score_measures.csv. Treated configurations are in Figure 8 and the source file.');
+const pc=D.paired.filter(r=>r.a.endsWith('/untreated')&&r.b.endsWith('/untreated'));
+table(p,'Paired differences between untreated models (same collision draws)',['A','B','Measure','A − B [95% interval]','Excludes zero'],pc.map(r=>[r.a,r.b,r.measure,ci(r.difference,r.lo,r.hi,4),r.interval_excludes_zero?'yes':'no']),'Source: paired_contrasts_2025.csv. For Brier, a negative difference favours A. The ranking HGB > RF > LR holds on every measure shown. The HGB–RF gap in AP is about 0.006: clear of zero within 2025 sampling, but small in absolute terms.');
+chart(p,'c3b',420,'Source: reliability_bins_2025.csv. Ten equal-count bins of predicted risk. Untreated models only; weighted and oversampled scores sit far from the diagonal by construction. Observed rates lie above the diagonal for every untreated model in the lowest bins.','Reliability of untreated models on 2025');
+reg('c3b',()=>{const tr=[{x:[0,0.6],y:[0,0.6],mode:'lines',line:{color:css('--mute'),dash:'dot',width:1},showlegend:false,hoverinfo:'skip'}];
+ M.forEach(m=>{const d=sel(D.rel,{model:m,training:'untreated'});tr.push({x:d.map(r=>r.mean_pred),y:d.map(r=>r.observed),mode:'lines+markers',name:m.toUpperCase(),line:{color:mc(m),width:2},marker:{size:8,line:{color:css('--bg'),width:2}},hovertemplate:m.toUpperCase()+'<br>predicted %{x:.3f}, observed %{y:.3f}<extra></extra>'})});
+ return [tr,base({xaxis:ax({title:'Mean predicted risk',range:[0,0.6]}),yaxis:ax({title:'Observed KSI share',range:[0,0.6]})})]});
+chart(p,'c3c',420,'Source: results_2025_decisions.csv. Tuned threshold per configuration, with 95% intervals. Recall rises while precision falls: choosing a threshold trades missed KSI against false alarms.','Recall and precision at the frozen tuned threshold');
+reg('c3c',()=>{const d=D.dec.filter(r=>r.rule==='opt');const tr=[];
+ [['recall','Recall'],['precision','Precision']].forEach(([k,n],i)=>{tr.push({x:d.map(r=>r[k]),y:d.map(r=>lab(r.model,r.training)),mode:'markers',type:'scatter',xaxis:'x'+(i+1),yaxis:'y'+(i+1),showlegend:false,marker:{size:9,color:d.map(r=>mc(r.model)),symbol:d.map(r=>SYM[r.training]),line:{color:css('--bg'),width:1.5}},
+  error_x:{type:'data',symmetric:false,array:d.map(r=>r[k+'_hi']-r[k]),arrayminus:d.map(r=>r[k]-r[k+'_lo']),color:css('--mute'),thickness:1.5,width:3},hovertemplate:'%{y}<br>'+n+' %{x:.3f}<extra></extra>'})});
+ return [tr,base({grid:{rows:1,columns:2,pattern:'independent'},xaxis:ax({title:'Recall',domain:[0.27,0.55]}),xaxis2:ax({title:'Precision',domain:[0.72,1]}),yaxis:ax({autorange:'reversed'}),yaxis2:ax({autorange:'reversed',showticklabels:false}),margin:{l:160,r:10,t:20,b:50}})]});
+table(p,'Decisions at the tuned threshold, 2025 (estimate [95% interval])',['Model','Training','Threshold','Recall','Precision','Specificity','Macro-F1','Flagged share'],
+ D.dec.filter(r=>r.rule==='opt').map(r=>[r.model.toUpperCase(),TN[r.training],f(r.threshold,2),ci(r.recall,r.recall_lo,r.recall_hi),ci(r.precision,r.precision_lo,r.precision_hi),ci(r.specificity,r.specificity_lo,r.specificity_hi),ci(r.macro_f1,r.macro_f1_lo,r.macro_f1_hi),pct(r.flagged_share,1)]),'Source: results_2025_decisions.csv. Threshold from development data only. At 0.5 the untreated models flag few casualties (LR: 5.8%), so macro-F1 at 0.5 and at the tuned threshold rank models almost unrelatedly (Spearman 0.15; ranking_agreement_2025.csv).');
+const tv=D.tvu.filter(r=>['ap','auc'].includes(r.measure)||(r.measure==='macro_f1'&&r.rule==='opt'));
+table(p,'Share of bootstrap draws in which the treated model beats the same model untreated',['Model','Treatment','Measure','Rule','Share of draws'],tv.map(r=>[r.model.toUpperCase(),TN[r.training],r.measure,r.rule==='opt'?'tuned':'threshold-free',pct(r.share_of_draws_treated_better,1)]),'Source: treated_vs_untreated_share_better_2025.csv. Values near 0% or 100% are consistent; values near 50% mean no difference. Random forest with weights beat untreated RF on AP in most draws but by a trivial margin and the pattern did not hold on 2024 (temporal_2023_to_2024_paired_contrasts.csv).');
+})();
+
+/* ============ PAGE 4 ============ */
+(function(){const p='p4';
+html(p,`<h2 class="pb">4  Subgroups and recording systems (2025)</h2><p class="sub">Frozen scores split by road-user type and by the police-force recording system. Groups overlap across the two partitions. Intervals resample collisions; groups with few KSI have wide intervals. Subgroup differences are descriptive and not corrected for multiple comparisons.</p>`);
+const groups=D.sgo.map(r=>r.group);
+const gShort=g=>g.replace('Road user: ','').replace('Recording system: ','RS: ');
+chart(p,'c4a',460,'Source: subgroups_2025_score_measures.csv. Untreated models. AP depends on prevalence, which differs strongly by group (pedestrians 31%, “other” 16%), so levels are not comparable across groups; compare models within a group.','Average precision by subgroup and model');
+reg('c4a',()=>[M.map(m=>{const d=groups.map(g=>one(D.sgs,{group:g,model:m,training:'untreated',measure:'ap'}));
+ return {x:d.map(r=>r.estimate),y:groups.map(gShort),mode:'markers',type:'scatter',name:m.toUpperCase(),marker:{size:9,color:mc(m),line:{color:css('--bg'),width:1.5}},
+ error_x:{type:'data',symmetric:false,array:d.map(r=>r.hi-r.estimate),arrayminus:d.map(r=>r.estimate-r.lo),color:css('--mute'),thickness:1.2,width:3},hovertemplate:m.toUpperCase()+' %{y}: %{x:.3f}<extra></extra>'}}),
+ base({xaxis:ax({title:'Average precision'}),yaxis:ax({autorange:'reversed'}),margin:{l:190,r:20,t:20,b:60}})]);
+chart(p,'c4b',460,'Source: subgroups_2025_decision_measures.csv. HGB untreated at its pooled tuned threshold (0.30). One pooled threshold gives very different recall by group: “other” casualties (63% of misses overall) are rarely flagged.','Recall at the tuned threshold by subgroup (HGB untreated)');
+reg('c4b',()=>{const d=groups.map(g=>one(D.sgd,{group:g,model:'hgb',training:'untreated',rule:'opt'}));
+ return [[{x:d.map(r=>r.recall),y:groups.map(gShort),mode:'markers',type:'scatter',showlegend:false,marker:{size:9,color:css('--hgb'),line:{color:css('--bg'),width:1.5}},
+ error_x:{type:'data',symmetric:false,array:d.map(r=>r.recall_hi-r.recall),arrayminus:d.map(r=>r.recall-r.recall_lo),color:css('--mute'),thickness:1.2,width:3},hovertemplate:'%{y}: recall %{x:.3f}<extra></extra>'}],
+ base({xaxis:ax({title:'Recall'}),yaxis:ax({autorange:'reversed'}),margin:{l:190,r:20,t:20,b:50}})]});
+table(p,'Subgroup prevalence and HGB untreated at the tuned threshold (estimate [95% interval])',['Group','Casualties','KSI','KSI share','AP','Recall','Precision','Flagged share'],
+ groups.map(g=>{const o=one(D.sgo,{group:g}),a=one(D.sgs,{group:g,model:'hgb',training:'untreated',measure:'ap'}),d=one(D.sgd,{group:g,model:'hgb',training:'untreated',rule:'opt'});
+  return [gShort(g),n0(o.casualties),n0(o.ksi_cases),ci(o.prevalence,o.prev_lo,o.prev_hi),ci(a.estimate,a.lo,a.hi),ci(d.recall,d.recall_lo,d.recall_hi),ci(d.precision,d.precision_lo,d.precision_hi),pct(d.flagged_share,1)]}),'Source: subgroups_2025_overview.csv, subgroups_2025_score_measures.csv, subgroups_2025_decision_measures.csv. E-scooter riders have 442 KSI cases, so intervals are wide.');
+const dc=D.decomp;
+chart(p,'c4c',380,'Source: ksi_change_decomposition_2025_vs_2023_24.csv. Oaxaca-style split of the change in overall KSI share (2025 versus pooled 2023–24) into within-group change and change in group mix; the two parts sum exactly to each group’s total. Descriptive only, no interval.','Where the rise in recorded KSI share comes from (percentage points)');
+reg('c4c',()=>[[{y:dc.map(r=>gShort(r.group)),x:dc.map(r=>100*r.within_group),type:'bar',orientation:'h',name:'Within-group change',marker:{color:css('--lr')}},
+ {y:dc.map(r=>gShort(r.group)),x:dc.map(r=>100*r.change_in_mix),type:'bar',orientation:'h',name:'Change in mix',marker:{color:css('--c4')}}],
+ base({barmode:'relative',xaxis:ax({title:'Contribution to change in overall KSI share (percentage points)'}),yaxis:ax({autorange:'reversed'}),margin:{l:190,r:20,t:20,b:70}})]);
+note(p,`Overall recorded KSI share rose from ${pct(D.prev.find(r=>r.group==='All casualties'&&r.year===2024).prevalence,1)} (2024) to ${pct(D.prev.find(r=>r.group==='All casualties'&&r.year===2025).prevalence,1)} (2025). Within the recording-system partition, forces with changed or mixed recording contribute ${f(100*dc[2].total,2)} points and the two stable groups ${f(100*dc[0].total,2)} and ${f(100*dc[1].total,2)} points (recording-system partition, 2025 against pooled 2023–24). A rise in recorded KSI is not the same as a rise in injury severity: recording-system change is a plausible contributor.`);
+const ra=D.radj.filter(r=>['All casualties','Recording system: stable injury-based','Recording system: stable non-injury-based','Recording system: changed or mixed'].includes(r.group));
+chart(p,'c4d',340,'Source: recorded_vs_adjusted_ksi_annual.csv. Gap = DfT-adjusted KSI share minus recorded KSI share, in percentage points. Adjusted KSI = fatal + the sum of DfT-adjusted probabilities of serious injury over other casualties. The gap narrows in 2025 as recording systems converge. Adjusted values are DfT model-based estimates with their own uncertainty, not shown here.','Gap between DfT-adjusted and recorded KSI share (percentage points)');
+reg('c4d',()=>{const gs=[...new Set(ra.map(r=>r.group))];
+ return [['2023','2024','2025'].map((y,i)=>({x:gs.map(gShort),y:gs.map(g=>one(ra,{group:g,source_year:+y}).gap_points),type:'bar',name:y,marker:{color:[css('--c7'),css('--c4'),css('--rf')][i]},hovertemplate:'%{x} '+y+': %{y:.2f} points<extra></extra>'})),
+ base({barmode:'group',yaxis:ax({title:'Adjusted minus recorded (points)'}),xaxis:ax({})})]});
+table(p,'Recorded and adjusted KSI share by recording system',['Group','Year','Recorded KSI','Adjusted KSI','Recorded share','Adjusted share','Gap (points)'],ra.map(r=>[gShort(r.group),r.source_year,n0(r.recorded_ksi),n0(Math.round(r.adjusted_ksi)),pct(r.recorded_rate,2),pct(r.adjusted_rate,2),f(r.gap_points,2)]),'Source: recorded_vs_adjusted_ksi_annual.csv. Descriptive counts, no sampling interval.');
+const sv=['base','force_included','casualty_count_removed'], svn={base:'Frozen model',force_included:'Police force added',casualty_count_removed:'Casualty count removed'};
+chart(p,'c4e',380,'Source: sensitivity_2025_measures.csv. Untreated models only. Adding the police force raises point AP for all three models but shifts the overall calibration intercept away from zero (table below); the frozen model stays primary and these are sensitivity results.','Sensitivity: average precision by model variant');
+reg('c4e',()=>[sv.map((v,i)=>{const d=M.map(m=>one(D.sens,{variant:v,model:m}));return {x:M.map(m=>m.toUpperCase()),y:d.map(r=>r.ap),type:'bar',name:svn[v],marker:{color:[css('--mute'),css('--c7'),css('--c4')][i]},
+ error_y:{type:'data',symmetric:false,array:d.map(r=>r.ap_hi-r.ap),arrayminus:d.map(r=>r.ap-r.ap_lo),color:css('--ink2'),thickness:1.2,width:3},hovertemplate:svn[v]+' %{x}: %{y:.4f}<extra></extra>'}}),
+ base({barmode:'group',yaxis:ax({title:'Average precision',range:[0.40,0.49]}),xaxis:ax({})})]);
+table(p,'Sensitivity variants, untreated models (estimate [95% interval])',['Variant','Model','AP','ROC-AUC','Calibration intercept','Macro-F1 at tuned threshold','Recording-system intercept gap'],
+ sv.flatMap(v=>M.map(m=>{const r=one(D.sens,{variant:v,model:m}),g=one(D.sgap,{variant:v,model:m});return [svn[v],m.toUpperCase(),ci(r.ap,r.ap_lo,r.ap_hi,4),ci(r.auc,r.auc_lo,r.auc_hi,4),ci(r.cal_intercept,r.cal_intercept_lo,r.cal_intercept_hi,3),ci(r.macro_f1_at_opt,r.macro_f1_at_opt_lo,r.macro_f1_at_opt_hi,3),ci(g.intercept_gap_injury_minus_non_injury,g.lo,g.hi,2)]})),'Source: sensitivity_2025_measures.csv, sensitivity_2025_system_calibration_gap.csv. Gap = calibration intercept in stable injury-based minus stable non-injury-based forces; positive means the model under-predicts KSI more in injury-based forces. Variant thresholds re-derived on each variant’s own development scores.');
+const tp=D.temporal.filter(r=>r.training==='untreated');
+chart(p,'c4f',320,'Source: temporal_2023_to_2024_vs_2025_test.csv. Model trained on 2023 and tested on 2024, against the main design (trained 2023–24, tested 2025). Point estimates; intervals in the source analysis for 2024 are in temporal_2023_to_2024_score_measures.csv.','Second temporal test: ROC-AUC, 2024 (trained on 2023) versus 2025 (trained on 2023–24)');
+reg('c4f',()=>[[{x:tp.map(r=>r.model.toUpperCase()),y:tp.map(r=>r.auc_2024_from_2023),type:'bar',name:'2024 from 2023',marker:{color:css('--mute')}},{x:tp.map(r=>r.model.toUpperCase()),y:tp.map(r=>r.auc_2025_from_2023_24),type:'bar',name:'2025 from 2023–24',marker:{color:css('--c7')}}],
+ base({barmode:'group',yaxis:ax({title:'ROC-AUC',range:[0.68,0.75]}),xaxis:ax({})})]);
+})();
+
+/* ============ PAGE 5 ============ */
+(function(){const p='p5';
+html(p,`<h2 class="pb">5  Predictor importance (selected model, HGB untreated)</h2><p class="sub">Permutation importance: one original field is shuffled in held-out data and the fall in average precision is recorded. Three shuffles per field per fold (a logged departure from ten). Importance is not causal and is spread among correlated fields, so a small drop does not mean a field is unrelated to severity.</p>`);
+const top=D.imp.slice().sort((a,b)=>a.rank_by_mean_drop-b.rank_by_mean_drop).slice(0,15).reverse();
+chart(p,'c5a',480,'Source: permutation_importance_dev_summary.csv. Bars: mean drop in AP across five development folds; whiskers: minimum and maximum fold values (spread across folds, not a confidence interval).','Top 15 fields by mean fall in average precision (development folds)');
+reg('c5a',()=>[[{y:top.map(r=>r.field),x:top.map(r=>r.mean_drop),type:'bar',orientation:'h',marker:{color:css('--hgb')},
+ error_x:{type:'data',symmetric:false,array:top.map(r=>r.max_fold_drop-r.mean_drop),arrayminus:top.map(r=>r.mean_drop-r.min_fold_drop),color:css('--ink2'),thickness:1.2,width:3},
+ hovertemplate:'%{y}: %{x:.4f}<extra></extra>',showlegend:false}],base({xaxis:ax({title:'Mean fall in average precision'}),yaxis:ax({}),margin:{l:210,r:20,t:20,b:50}})]);
+const t15=D.imp25.slice().sort((a,b)=>a.rank_2025-b.rank_2025).slice(0,15).reverse();
+chart(p,'c5b',480,'Source: permutation_importance_2025_vs_dev.csv. 2025 drops use the model refitted on 2023–24 and three shuffles of the 2025 data (whiskers: ±1 SD over the three shuffles). Ranks agree closely between development and 2025.','Development versus 2025 importance for the top 15 fields');
+reg('c5b',()=>[[{y:t15.map(r=>r.field),x:t15.map(r=>r.dev_mean_drop),mode:'markers',type:'scatter',name:'Development folds',marker:{size:9,color:css('--mute'),symbol:'circle',line:{color:css('--bg'),width:1.5}}},
+ {y:t15.map(r=>r.field),x:t15.map(r=>r.drop_mean),mode:'markers',type:'scatter',name:'2025',marker:{size:9,color:css('--c7'),symbol:'diamond',line:{color:css('--bg'),width:1.5}},error_x:{type:'data',array:t15.map(r=>r.drop_sd_repeats),color:css('--ink2'),thickness:1.2,width:3}}],
+ base({xaxis:ax({title:'Fall in average precision'}),yaxis:ax({}),margin:{l:210,r:20,t:20,b:70}})]);
+table(p,'Top 15 fields (development folds and 2025)',['Rank','Field','Type','Dev mean drop (min–max over folds)','Share of baseline AP','2025 drop (±SD of shuffles)','2025 rank'],
+ D.imp.slice().sort((a,b)=>a.rank_by_mean_drop-b.rank_by_mean_drop).slice(0,15).map(r=>{const x=one(D.imp25,{field:r.field});return [r.rank_by_mean_drop,r.field,r.kind,`${f(r.mean_drop,4)} (${f(r.min_fold_drop,4)}–${f(r.max_fold_drop,4)})`,pct(r.share_of_baseline_ap,1),`${f(x.drop_mean,4)} ± ${f(x.drop_sd_repeats,4)}`,x.rank_2025]}),'Source: permutation_importance_dev_summary.csv, permutation_importance_2025_vs_dev.csv. Casualty type alone accounts for about a fifth of baseline AP; the top nine fields are stable across all five folds.');
+note(p,'Reading note: casualty type, age and speed limit lead. Because vehicle type, first point of impact, manoeuvre and casualty type are related, shuffling one field leaves partial information in the others, which understates its importance. These results describe what the fitted model relies on, not what causes severity.');
+})();
+
+/* ============ shell ============ */
+const nav=document.getElementById('nav');
+PAGES.forEach(([id,t],i)=>{const b=document.createElement('button');b.textContent=t;b.setAttribute('role','tab');b.onclick=()=>show(id);b.dataset.id=id;nav.appendChild(b)});
+nav.insertAdjacentHTML('beforeend','<span class="sp"></span><button class="th" id="thb">Theme</button>');
+document.getElementById('thb').onclick=()=>{const r=document.documentElement;const dark=(r.dataset.theme==='dark')||(!r.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);r.dataset.theme=dark?'light':'dark';draw()};
+function show(id){
+PAGES.forEach(([i])=>document.getElementById(i).classList.toggle('on',i===id));nav.querySelectorAll('button[data-id]').forEach(b=>b.setAttribute('aria-selected',b.dataset.id===id));
+ try{location.hash=id}catch(e){} document.querySelectorAll('#'+id+' .chart').forEach(c=>Plotly.Plots.resize(c));setTimeout(()=>document.querySelectorAll('#'+id+' .chart').forEach(c=>Plotly.Plots.resize(c)),50)}
+draw();const h0=(location.hash||'#p1').slice(1);show(/^p[1-5]$/.test(h0)?h0:'p1');
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',draw);
+</script></body></html>
