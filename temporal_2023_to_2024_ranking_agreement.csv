@@ -1,4 +1,0 @@
-measure,spearman_nine_combinations,best_2024,best_2025
-ROC-AUC,0.967,hgb/weight,hgb/untreated
-average precision,0.983,hgb/untreated,hgb/untreated
-macro-F1 at tuned threshold,0.883,hgb/untreated,hgb/untreated
