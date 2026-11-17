@@ -1,9 +1,0 @@
-group,share_2023_24,share_2025,prev_2023_24,prev_2025,within_group,change_in_mix,total,partition
-Recording system: stable injury-based,0.554475,0.553123,0.238444,0.246554,0.004486,-0.000322,0.004164,recording system
-Recording system: stable non-injury-based,0.063028,0.063198,0.215535,0.223583,0.000509,3.7e-05,0.000545,recording system
-Recording system: changed or mixed,0.382497,0.383679,0.172196,0.204806,0.012512,0.000203,0.012715,recording system
-Road user: pedestrian,0.147135,0.156221,0.312989,0.310091,-0.000453,0.002844,0.002391,road user
-Road user: cyclist,0.113103,0.125443,0.249966,0.268233,0.002291,0.003085,0.005376,road user
-Road user: motorcyclist,0.126079,0.12079,0.332412,0.388554,0.006781,-0.001758,0.005023,road user
-Road user: e-scooter rider,0.008559,0.009595,0.301878,0.360228,0.00056,0.000313,0.000873,road user
-Road user: other,0.605124,0.587951,0.153427,0.164306,0.006396,-0.002635,0.003761,road user

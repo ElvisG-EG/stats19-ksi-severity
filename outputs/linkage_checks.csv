@@ -1,4 +1,0 @@
-dimension,check,year,n_flagged,note
-conformance,collision: duplicate collision_index,all,0,
-conformance,"vehicle: duplicate (collision_index, vehicle_reference)",all,0,
-conformance,"casualty: duplicate (collision_index, casualty_reference)",all,0,

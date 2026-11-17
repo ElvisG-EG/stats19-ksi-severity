@@ -1,7 +1,0 @@
-{
- "model": "hgb",
- "training": "untreated",
- "mean_fold_macro_f1": 0.650864305880157,
- "leader": "hgb/untreated",
- "one_se": 0.0018111588106018669
-}
