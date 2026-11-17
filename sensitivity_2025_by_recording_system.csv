@@ -1,0 +1,55 @@
+variant,model,group,measure,estimate,lo,hi
+base,lr,stable injury-based,auc,0.71333,0.70857,0.71808
+base,lr,stable injury-based,cal_intercept,0.08408,0.06482,0.10361
+base,lr,stable non-injury-based,auc,0.73733,0.71588,0.75576
+base,lr,stable non-injury-based,cal_intercept,-0.15526,-0.27752,-0.0585
+base,lr,changed or mixed,auc,0.73439,0.72888,0.73982
+base,lr,changed or mixed,cal_intercept,0.03867,0.01408,0.06426
+base,rf,stable injury-based,auc,0.72264,0.71781,0.72748
+base,rf,stable injury-based,cal_intercept,0.0967,0.0783,0.11574
+base,rf,stable non-injury-based,auc,0.74412,0.73035,0.75812
+base,rf,stable non-injury-based,cal_intercept,-0.14765,-0.20512,-0.08893
+base,rf,changed or mixed,auc,0.74701,0.74166,0.75254
+base,rf,changed or mixed,cal_intercept,-0.02945,-0.05398,-0.00488
+base,hgb,stable injury-based,auc,0.72713,0.72244,0.7319
+base,hgb,stable injury-based,cal_intercept,0.09425,0.07565,0.1135
+base,hgb,stable non-injury-based,auc,0.75044,0.7374,0.76426
+base,hgb,stable non-injury-based,cal_intercept,-0.098,-0.15525,-0.0386
+base,hgb,changed or mixed,auc,0.74949,0.74406,0.75481
+base,hgb,changed or mixed,cal_intercept,0.00095,-0.02302,0.02573
+force_included,lr,stable injury-based,auc,0.72227,0.71766,0.7269
+force_included,lr,stable injury-based,cal_intercept,0.03056,0.01141,0.05045
+force_included,lr,stable non-injury-based,auc,0.73847,0.71537,0.75768
+force_included,lr,stable non-injury-based,cal_intercept,-0.03933,-0.20031,0.07499
+force_included,lr,changed or mixed,auc,0.73455,0.7292,0.74012
+force_included,lr,changed or mixed,cal_intercept,0.23476,0.20987,0.25989
+force_included,rf,stable injury-based,auc,0.72647,0.72191,0.73127
+force_included,rf,stable injury-based,cal_intercept,0.06777,0.04934,0.08665
+force_included,rf,stable non-injury-based,auc,0.74526,0.73132,0.75895
+force_included,rf,stable non-injury-based,cal_intercept,-0.10827,-0.16553,-0.04851
+force_included,rf,changed or mixed,auc,0.74865,0.74325,0.75414
+force_included,rf,changed or mixed,cal_intercept,0.02908,0.00489,0.05393
+force_included,hgb,stable injury-based,auc,0.73453,0.72997,0.73916
+force_included,hgb,stable injury-based,cal_intercept,0.04321,0.0244,0.06263
+force_included,hgb,stable non-injury-based,auc,0.75635,0.74287,0.76982
+force_included,hgb,stable non-injury-based,cal_intercept,-0.00685,-0.06216,0.05337
+force_included,hgb,changed or mixed,auc,0.7502,0.74488,0.75556
+force_included,hgb,changed or mixed,cal_intercept,0.15308,0.12844,0.17837
+casualty_count_removed,lr,stable injury-based,auc,0.71326,0.70843,0.71804
+casualty_count_removed,lr,stable injury-based,cal_intercept,0.0843,0.06523,0.10372
+casualty_count_removed,lr,stable non-injury-based,auc,0.74361,0.7297,0.75699
+casualty_count_removed,lr,stable non-injury-based,cal_intercept,-0.1012,-0.16006,-0.03951
+casualty_count_removed,lr,changed or mixed,auc,0.73387,0.7283,0.73939
+casualty_count_removed,lr,changed or mixed,cal_intercept,0.03948,0.01475,0.06517
+casualty_count_removed,rf,stable injury-based,auc,0.72156,0.71679,0.72646
+casualty_count_removed,rf,stable injury-based,cal_intercept,0.09749,0.07906,0.11626
+casualty_count_removed,rf,stable non-injury-based,auc,0.74455,0.73066,0.75826
+casualty_count_removed,rf,stable non-injury-based,cal_intercept,-0.15297,-0.2105,-0.0937
+casualty_count_removed,rf,changed or mixed,auc,0.74563,0.74033,0.75106
+casualty_count_removed,rf,changed or mixed,cal_intercept,-0.03022,-0.0547,-0.00539
+casualty_count_removed,hgb,stable injury-based,auc,0.72607,0.72138,0.73084
+casualty_count_removed,hgb,stable injury-based,cal_intercept,0.09514,0.07622,0.11423
+casualty_count_removed,hgb,stable non-injury-based,auc,0.75063,0.73779,0.76424
+casualty_count_removed,hgb,stable non-injury-based,cal_intercept,-0.09176,-0.14968,-0.03194
+casualty_count_removed,hgb,changed or mixed,auc,0.74796,0.7424,0.75341
+casualty_count_removed,hgb,changed or mixed,cal_intercept,-0.00148,-0.02578,0.02376

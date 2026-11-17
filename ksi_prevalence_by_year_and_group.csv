@@ -1,0 +1,31 @@
+group,year,casualties,ksi_cases,prevalence,share_of_year
+All casualties,2023,132977,27654,0.20796,1.0
+All casualties,2024,128272,27642,0.2155,1.0
+All casualties,2025,127883,29296,0.22908,1.0
+Road user: pedestrian,2023,19263,6117,0.31755,0.14486
+Road user: pedestrian,2024,19176,5914,0.30841,0.14949
+Road user: pedestrian,2025,19978,6195,0.31009,0.15622
+Road user: cyclist,2023,14999,3728,0.24855,0.11279
+Road user: cyclist,2024,14549,3658,0.25143,0.11342
+Road user: cyclist,2025,16042,4303,0.26823,0.12544
+Road user: motorcyclist,2023,16978,5457,0.32142,0.12768
+Road user: motorcyclist,2024,15960,5492,0.34411,0.12442
+Road user: motorcyclist,2025,15447,6002,0.38855,0.12079
+Road user: e-scooter rider,2023,1117,321,0.28738,0.0084
+Road user: e-scooter rider,2024,1119,354,0.31635,0.00872
+Road user: e-scooter rider,2025,1227,442,0.36023,0.00959
+Road user: other,2023,80620,12031,0.14923,0.60627
+Road user: other,2024,77468,12224,0.15779,0.60394
+Road user: other,2025,75189,12354,0.16431,0.58795
+Recording system: stable injury-based,2023,73119,17219,0.23549,0.54986
+Recording system: stable injury-based,2024,71737,17321,0.24145,0.55926
+Recording system: stable injury-based,2025,70735,17440,0.24655,0.55312
+Recording system: stable non-injury-based,2023,8561,1876,0.21913,0.06438
+Recording system: stable non-injury-based,2024,7905,1673,0.21164,0.06163
+Recording system: stable non-injury-based,2025,8082,1807,0.22358,0.0632
+Recording system: changed or mixed,2023,51297,8559,0.16685,0.38576
+Recording system: changed or mixed,2024,48630,8648,0.17783,0.37912
+Recording system: changed or mixed,2025,49066,10049,0.20481,0.38368
+Unchanged forces (both stable groups),2023,81680,19095,0.23378,0.61424
+Unchanged forces (both stable groups),2024,79642,18994,0.23849,0.62088
+Unchanged forces (both stable groups),2025,78817,19247,0.2442,0.61632
