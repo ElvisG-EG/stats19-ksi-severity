@@ -1,7 +1,0 @@
-variant,model,threshold,frozen_threshold,oof_macro_f1,oof_ap,oof_ap_frozen_model
-force_included,lr,0.31,0.31,0.6468,0.4456,0.4344
-force_included,rf,0.3,0.3,0.6503,0.4539,0.4484
-force_included,hgb,0.3,0.3,0.6558,0.466,0.4556
-casualty_count_removed,lr,0.3,0.31,0.6411,0.4357,0.4344
-casualty_count_removed,rf,0.3,0.3,0.6478,0.4476,0.4484
-casualty_count_removed,hgb,0.31,0.3,0.6502,0.4549,0.4556
