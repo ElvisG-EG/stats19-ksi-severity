@@ -1,0 +1,158 @@
+{
+ "created": "2026-11-07T17:23:20",
+ "purpose": "Freeze before refit and 2025 scoring (methodology 3.7.4)",
+ "seed": 20261107,
+ "sklearn": "1.6.1",
+ "rare_min_freq": 100,
+ "rf_trees": 100,
+ "predictors": {
+  "numeric": [
+   "age_of_casualty",
+   "casualty_imd_decile",
+   "age_of_driver",
+   "engine_capacity_cc",
+   "driver_imd_decile",
+   "speed_limit",
+   "number_of_vehicles",
+   "number_of_casualties"
+  ],
+  "categorical": [
+   "casualty_class",
+   "sex_of_casualty",
+   "casualty_type",
+   "pedestrian_location",
+   "pedestrian_movement",
+   "car_passenger",
+   "bus_or_coach_passenger",
+   "pedestrian_road_maintenance_worker",
+   "vehicle_type",
+   "towing_and_articulation",
+   "vehicle_manoeuvre",
+   "vehicle_direction_from",
+   "vehicle_direction_to",
+   "vehicle_location_restricted_lane",
+   "junction_location",
+   "skidding_and_overturning",
+   "hit_object_in_carriageway",
+   "vehicle_leaving_carriageway",
+   "hit_object_off_carriageway",
+   "first_point_of_impact",
+   "vehicle_left_hand_drive",
+   "journey_purpose_of_driver",
+   "sex_of_driver",
+   "propulsion_code",
+   "first_road_class",
+   "road_type",
+   "junction_detail",
+   "junction_control",
+   "second_road_class",
+   "pedestrian_crossing",
+   "light_conditions",
+   "weather_conditions",
+   "road_surface_conditions",
+   "carriageway_hazards",
+   "urban_or_rural_area",
+   "trunk_road_flag",
+   "hour",
+   "day_of_week",
+   "month"
+  ]
+ },
+ "settings": {
+  "lr": {
+   "cfg": 4,
+   "params": {
+    "C": 0.1
+   }
+  },
+  "rf": {
+   "cfg": 1,
+   "params": {
+    "max_features": 0.2,
+    "min_samples_leaf": 10,
+    "min_samples_split": 10
+   }
+  },
+  "hgb": {
+   "cfg": 2,
+   "params": {
+    "learning_rate": 0.05,
+    "max_iter": 200,
+    "max_leaf_nodes": 63,
+    "min_samples_leaf": 50,
+    "l2_regularization": 0.0
+   }
+  }
+ },
+ "thresholds": {
+  "lr__untreated": {
+   "ref": 0.5,
+   "opt": 0.31
+  },
+  "lr__weight": {
+   "ref": 0.5,
+   "opt": 0.62
+  },
+  "lr__oversample": {
+   "ref": 0.5,
+   "opt": 0.62
+  },
+  "rf__untreated": {
+   "ref": 0.5,
+   "opt": 0.3
+  },
+  "rf__weight": {
+   "ref": 0.5,
+   "opt": 0.52
+  },
+  "rf__oversample": {
+   "ref": 0.5,
+   "opt": 0.51
+  },
+  "hgb__untreated": {
+   "ref": 0.5,
+   "opt": 0.3
+  },
+  "hgb__weight": {
+   "ref": 0.5,
+   "opt": 0.62
+  },
+  "hgb__oversample": {
+   "ref": 0.5,
+   "opt": 0.62
+  }
+ },
+ "selected_for_importance": {
+  "model": "hgb",
+  "training": "untreated",
+  "mean_fold_macro_f1": 0.650864305880157,
+  "leader": "hgb/untreated",
+  "one_se": 0.0018111588106018669
+ },
+ "input_sha256": {
+  "lib": "ab3f7748e0fc5fd1ef3337893df40422feb76e81b1efd266147d6cd7e5a139dc",
+  "features_dev": "5eb10d48a8b00fa2bd27d3328a12cd94bc76f03d1fda445bfa890bdb64213062",
+  "features_test_2025_no_labels": "055dc5a9d8a167cda0987870ffd80013352dd94e109470872d8d8030d609d5fb",
+  "folds_dev": "c5fd91489cb00acf08017c2632ecc8693d612ca6d0c170bf4c9e459d684efaa7",
+  "oof_scores_dev": "32272281a6510539f12a43bd37e2a1d3db6ec0a9f9ac39d9a6443b9ffc442789",
+  "selected_settings": "f10ef5d779a71a788e400f824ae8a058f10c7b3b631bc3fddfec3e0e024d92ab",
+  "search_summary": "8c45918b51091f1057f9ca8e461d48814b83fb5f649fa766900bf9c5144d3c7c",
+  "search_configs_round2": "ce7662f57283a5082dec3a7716fa27aa472e7c803ffdf31a161d938d2e81beca",
+  "thresholds_dev": "257550951a5cf73a61281649579c6985279fe6c572209d1e27257c6f92b22abe",
+  "model_ranking_dev": "e4dad3c3ea13037ade3293b21ec496cce19799dfb253bd7ebcffa1237ce758e7"
+ },
+ "sealed_labels": {
+  "sha256_recorded_in_notebook02": "22ddae8fde110307daf9bd711a84f0b9cd18166d24e52194082b60e53cc3d4e3",
+  "file_bytes": 2558009,
+  "read_by_this_notebook": false
+ },
+ "labels_read_before_freeze": false,
+ "scores_2025": {
+  "file": "test_scores_and_decisions_2025.parquet",
+  "sha256": "010c53a0a7f95b360989326b7e539e085676f7acc730da3e39ac823d38a65e10",
+  "rows": 127883,
+  "written": "2026-11-07T17:57:09",
+  "labels_read_before_scores": false,
+  "recalibrated_on_2025": false
+ }
+}

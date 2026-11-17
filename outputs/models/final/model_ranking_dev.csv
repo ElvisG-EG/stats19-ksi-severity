@@ -1,0 +1,10 @@
+model,training,mean,sd,mean_at_ref,threshold,within_margin
+hgb,untreated,0.65086,0.00405,0.56734,0.3,True
+hgb,weight,0.65036,0.00363,0.61608,0.62,True
+hgb,oversample,0.64996,0.0032,0.61571,0.62,True
+rf,untreated,0.64812,0.00317,0.55389,0.3,False
+rf,weight,0.64775,0.00326,0.6467,0.52,False
+rf,oversample,0.64709,0.00378,0.646,0.51,False
+lr,untreated,0.64144,0.00432,0.55617,0.31,False
+lr,weight,0.64079,0.00426,0.60542,0.62,False
+lr,oversample,0.64057,0.0041,0.60547,0.62,False
